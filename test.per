@@ -11,6 +11,14 @@
 (disable-self)
 )
 
+; research feudal age
+(defrule
+    (can-research feudal-age)
+    (unit-type-count villager >= 27)
+=>
+    (research feudal-age)
+)
+
 ; training villagers
 (defrule
 (can-train villager)
@@ -80,6 +88,23 @@
 =>
     (build farm)
 )
+
+; villager distribution
+(defrule
+    (unit-type-count villager <= 6)
+=>
+    (set-strategic-number sn-food-gatherer-percentage 100)
+)
+
+(defrule
+    (unit-type-count villager >= 7)
+    (unit-type-count villager <= 10)
+=>
+    (set-strategic-number sn-food-gatherer-percentage 60)
+    (set-strategic-number sn-wood-gatherer-percentage 40)
+)
+
+
 
 
 
