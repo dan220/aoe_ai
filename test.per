@@ -17,3 +17,70 @@
 =>
 (train villager)
 )
+
+; building houses
+(defrule
+(current-age == dark-age)
+(can-build house)
+(housing-headroom < 3)
+=>
+(build house)
+)
+
+(defrule
+(current-age >= feudal-age)
+(can-build house)
+(housing-headroom < 8)
+=>
+(build house)
+)
+
+; research loom
+(defrule
+(can-research ri-loom)
+=>
+(research ri-loom)
+)
+
+; counter
+(defconst gl-counter 1)
+(defconst game-time 0)
+
+
+; drop of buildings
+(defrule 
+    (building-type-count-total mill == 0)
+    (building-type-count-total lumber-camp != 0)
+    (resource-found food)
+    (can-build mill)
+    ;(or
+     ;   (building-type-count-total house > 0)
+      ;  (civ-selected hun)
+    ;)
+=>
+    (build mill)
+)
+
+(defrule 
+    (building-type-count-total lumber-camp == 0)
+    (resource-found wood)
+    (can-build lumber-camp)
+=>
+    (build lumber-camp)
+)
+
+
+; farms
+(defrule 
+    (civilian-population >= 10)
+    (building-type-count-total farm < 4)
+    (building-type-count-total mill > 0)
+    (can-build farm)
+    (idle-farm-count < 1)
+=>
+    (build farm)
+)
+
+
+
+
