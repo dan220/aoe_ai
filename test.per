@@ -104,6 +104,32 @@
     (set-strategic-number sn-wood-gatherer-percentage 40)
 )
 
+; strategy
+(defconst gl-feudal-strat 1)
+(defconst archerrush 1)
+(defconst scoutrush 2)
+(defconst FC 3)
+(defrule
+    (nor
+        (civ-selected hun)
+        (civ-selected chinese)
+    )
+=>
+    (set-goal gl-feudal-strat FC) (chat-to-player my-player-number "my strategy is FC")
+    (disable-self)
+)
+(defrule
+    (civ-selected hun)
+=>
+    (set-goal gl-feudal-strat scoutrush) (chat-to-player my-player-number "my strategy is scoutrush")
+    (disable-self)
+)
+(defrule
+    (civ-selected chinese)
+=> 
+    (set-goal gl-feudal-strat archerrush) (chat-to-player my-player-number "my strtegy is archerrush")
+    (disable-self)
+)
 
 
 
